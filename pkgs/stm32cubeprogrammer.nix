@@ -1,5 +1,5 @@
 # https://github.com/NixOS/nixpkgs/issues/355181#issuecomment-3595404667
-{ lib, stdenv, requireFile, autoPatchelfHook, unzip, openjdk, writeShellScript, buildFHSEnv, libusb1, glib, libz, libkrb5, openssl, xorg, icoutils, qt6Packages, gtk3, pcsclite, wrapGAppsHook3, makeWrapper, copyDesktopItems, makeDesktopItem}:
+{ lib, stdenv, requireFile, autoPatchelfHook, unzip, openjdk, writeShellScript, buildFHSEnv, libusb1, glib, libz, libkrb5, openssl, libx11, icoutils, qt6Packages, gtk3, pcsclite, wrapGAppsHook3, makeWrapper, copyDesktopItems, makeDesktopItem}:
 
 let
   pname = "stm32cubeprog";
@@ -37,7 +37,7 @@ stdenv.mkDerivation {
     libkrb5
     openssl
     pcsclite
-    xorg.libX11
+    libx11
     qt6Packages.qtbase
     qt6Packages.qtserialport
     qt6Packages.qtwayland
