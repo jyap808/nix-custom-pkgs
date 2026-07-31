@@ -85,8 +85,8 @@ stdenv.mkDerivation {
       ls | awk -v prefix=$out/share/icons/hicolor/ -F'[_x.]' '{ dest=prefix $3 "x" $4; print "mkdir -p " dest "/apps/ && mv " $0 " " dest "/apps/" "${pname}" "." $NF}' | bash
       cd ..
 
-      mkdir -p $out/lib/udev/rules.d/
-      mv $out/Drivers/rules/* $out/lib/udev/rules.d/
+      # Skip udev rules - conflicts with stlink package which provides the same rules
+      # rm -rf $out/Drivers/rules
 
       # CLI tools are already ELF executables that invoke Java internally
       # Just preserve them as-is; the .exe suffix is from the installer
