@@ -37,7 +37,6 @@ Loads all packages from `pkgs/` into nixpkgs. Makes `dfu-util` and `vcv-rack` av
 
 Overrides a few nixpkgs packages with tweaks I need:
 
-- **`freecad`** - Adds `networkx` as an extra Python dependency for the SheetMetal workbench.
 - **`kicad-x11`** - Forces the `GDK_BACKEND=x11` environment variable to avoid Wayland rendering issues.
 - **`kicad-unstable-x11`** - Same X11 wrapper, but using the latest KiCad from nixpkgs-unstable.
 

@@ -14,12 +14,6 @@
       '';
     };
   in {
-    freecad = prev.freecad.customize {
-      pythons = [
-        (ps: [ ps.networkx ])
-      ];
-    };
-
     kicad-x11 = mkKicadX11 "kicad-x11" prev.kicad;
     kicad-unstable-x11 = mkKicadX11 "kicad-unstable-x11" unstablePkgs.kicad;
   };
