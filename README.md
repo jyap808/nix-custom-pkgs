@@ -21,7 +21,13 @@ imports = [ inputs.custom-pkgs.hmModules.freecad-gsettings ];
 Device firmware update (DFU) USB programmer. Built from upstream git rather than the nixpkgs release to pick up unreleased code.
 
 - `fast` mode enabled by default so tools like QMK don't need the `:fast` flag.
-- Pinned at `f9a537c` (2025-03-02).
+- Pinned at [`f9a537c`](https://sourceforge.net/p/dfu-util/dfu-util/ci/f9a537c93935d9d536b5ea29b54a226160b2b111/) (2025-03-02).
+
+### `stm32cubeprogrammer`
+
+All-in-one multi-OS software tool for programming STM32 products. Built from the ST installer zip, based on and modified from [this comment](https://github.com/NixOS/nixpkgs/issues/355181#issuecomment-3595404667).
+
+Note: uses `requireFile`, so you must download [`SetupSTM32CubeProgrammer_linux_64.zip`](https://www.st.com/en/development-tools/stm32cubeprog.html) and add it to the Nix store before building.
 
 ### `vcv-rack`
 
