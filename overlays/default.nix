@@ -21,13 +21,5 @@
   # Overrides for nixpkgs-unstable packages. Apply to the nixpkgs-unstable
   # import (see nix-home-manager-config flake.nix), not to stable pkgs.
   unstable-modifications = final: prev: {
-    # https://github.com/NixOS/nixpkgs/issues/563241
-    opencode = prev.opencode.overrideAttrs (old: {
-      postPatch = (old.postPatch or "") + ''
-        # fix for bun 1.4.x
-        substituteInPlace packages/opencode/script/build.ts \
-          --replace-fail 'splitting: true,' 'splitting: false,'
-      '';
-    });
   };
 }
