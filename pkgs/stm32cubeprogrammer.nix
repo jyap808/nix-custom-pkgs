@@ -13,6 +13,11 @@ in
 stdenv.mkDerivation {
   inherit version pname;
 
+  # ST's udev rules go to a separate output so they don't collide with
+  # stlink's 49-stlinkv*.rules when both are in home.packages/systemPackages
+  # (buildEnv hard-errors on duplicate paths).
+  outputs = [ "out" "udev" ];
+
   src = requireFile rec {
     name = "SetupSTM32CubeProgrammer_linux_64.zip";
     url = "https://www.st.com/en/development-tools/stm32cubeprog.html";
@@ -85,8 +90,10 @@ stdenv.mkDerivation {
       ls | awk -v prefix=$out/share/icons/hicolor/ -F'[_x.]' '{ dest=prefix $3 "x" $4; print "mkdir -p " dest "/apps/ && mv " $0 " " dest "/apps/" "${pname}" "." $NF}' | bash
       cd ..
 
-      # Skip udev rules - conflicts with stlink package which provides the same rules
-      # rm -rf $out/Drivers/rules
+      # Move udev rules out of the default output. They conflict with stlink's
+      # rules, and are opt-in via services.udev.packages = [ pkgs.stm32cubeprogrammer.udev ].
+      mkdir -p $udev/lib/udev
+      mv $out/Drivers/rules $udev/lib/udev/rules.d
 
       # CLI tools are already ELF executables that invoke Java internally
       # Just preserve them as-is; the .exe suffix is from the installer

@@ -19,6 +19,21 @@ All-in-one multi-OS software tool for programming STM32 products. Built from the
 
 Note: uses `requireFile`, so you must download [`SetupSTM32CubeProgrammer_linux_64.zip`](https://www.st.com/en/development-tools/stm32cubeprog.html) and add it to the Nix store before building.
 
+ST's bundled udev rules are not installed into the default output, because they
+collide with `stlink`'s `49-stlinkv*.rules` when both are in `home.packages` or
+`environment.systemPackages`. They are available separately as the `udev`
+output:
+
+```nix
+# Only needed for J-Link, or STM32 DFU access without QMK's 50-qmk.rules
+services.udev.packages = [ pkgs.stm32cubeprogrammer.udev ];
+```
+
+Use either `pkgs.stlink` or `pkgs.stm32cubeprogrammer.udev` for ST-Link access, not
+both. Duplicate rule filenames in `services.udev.packages` don't error - later
+packages silently overwrite earlier ones, so you'd lose `stlink`'s extra
+`0483:374a` and `0483:3744` coverage.
+
 ## Overlays
 
 ### `additions`
