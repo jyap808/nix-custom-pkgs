@@ -17,9 +17,4 @@
     kicad-x11 = mkKicadX11 "kicad-x11" prev.kicad;
     kicad-unstable-x11 = mkKicadX11 "kicad-unstable-x11" unstablePkgs.kicad;
   };
-
-  # Overrides for nixpkgs-unstable packages. Apply to the nixpkgs-unstable
-  # import (see nix-home-manager-config flake.nix), not to stable pkgs.
-  unstable-modifications = final: prev: {
-  };
 }

@@ -15,9 +15,5 @@
     );
 
     overlays = import ./overlays { inputs = { inherit nixpkgs-unstable; }; };
-
-    hmModules = {
-      freecad-gsettings = import ./modules/freecad-gsettings.nix;
-    };
   };
 }
